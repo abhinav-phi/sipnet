@@ -28,6 +28,9 @@ sections to include in release notes:
 
 ### Added
 
+- `--outvars` (and `outvars` in `sipnet.in`) to write only the selected
+  variables to `sipnet.out`. (#413)
+
 - Model-level nitrogen limitation tests covering coincident harvest, leaf, and
   fertilizer events, NPP signs, nitrogen availability, and flooding. (#415)
 

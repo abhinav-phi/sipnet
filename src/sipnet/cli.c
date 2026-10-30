@@ -52,6 +52,7 @@ static struct option long_options[] = {  // NOLINT
     {"restart-in", required_argument, 0, CLI_RESTART_IN},
     {"restart-out", required_argument, 0, CLI_RESTART_OUT},
     {"debug-log", required_argument, 0, CLI_DEBUG_LOG},
+    {"outvars", required_argument, 0, 'O'},
     {"help", no_argument, 0, 'h'},
     {"version", no_argument, 0, 'v'},
     {0, 0, 0, 0}};
@@ -207,6 +208,15 @@ void parseCommandLineArgs(int argc, char *argv[]) {
         }
         updateCharContext("debugLogPrefix", optarg, CTX_COMMAND_LINE);
       } break;
+      case 'O':
+        requireCLIArg("--outvars");
+        if (strlen(optarg) >= CONTEXT_CHAR_MAXLEN) {
+          logError("outvars value %s exceeds maximum length of %d\n", optarg,
+                   CONTEXT_CHAR_MAXLEN);
+          exit(EXIT_CODE_BAD_PARAMETER_VALUE);
+        }
+        updateCharContext("outvars", optarg, CTX_COMMAND_LINE);
+        break;
       case 'i':
         requireCLIArg("--input-file");
         if (strlen(optarg) >= FILENAME_MAXLEN) {

@@ -90,3 +90,18 @@ year  day  type     param_name=delta[,param_name=delta,...]
 2024   70  irrig    eventSoilWater=2.50,eventEvap=2.50
 2024  200  harv     eventSoilC=2.74,eventLitterC=1.51,eventLeafC=-1.39,eventWoodC=-1.63,eventFineRootC=-2.52,eventCoarseRootC=-2.97,eventSoilOrgN=0.00,eventLitterN=0.00,eventOutputC=4.25,eventOutputN=0.00
 ```
+
+## Selecting output variables
+
+By default `sipnet.out` contains every column above. Use `--outvars` to write
+only the variables you need, in the order you list them:
+
+```sh
+sipnet -i sipnet.in --outvars gpp,nee,soilWater
+```
+
+`year`, `day` and `time` are always written first. The default is `all`, and
+`--outvars all` is accepted explicitly. Names must match an Output Name above;
+duplicates are ignored. An empty list or an unknown name stops the run before
+the simulation starts and lists the valid names. The same selection can be set
+with `outvars` in `sipnet.in`; the command line takes precedence.

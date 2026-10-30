@@ -62,6 +62,7 @@ void initContext(void) {
   CREATE_CHAR_CONTEXT(restartIn,      "RESTART_IN",       NO_DEFAULT_FILE);
   CREATE_CHAR_CONTEXT(restartOut,     "RESTART_OUT",      NO_DEFAULT_FILE);
   CREATE_CHAR_CONTEXT(debugLogPrefix, "DEBUG_LOG_PREFIX", NO_DEFAULT_FILE);
+  CREATE_CHAR_CONTEXT(outvars,        "OUTVARS",         "all");
   // clang-format on
 
   // Other

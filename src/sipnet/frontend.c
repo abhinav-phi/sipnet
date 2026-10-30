@@ -20,6 +20,7 @@
 #include "sipnet.h"
 #include "state.h"
 #include "outputItems.h"
+#include "outputVariables.h"
 
 void checkRuntype(const char *runType) {
   if (strcasecmp(runType, "standard") != 0) {
@@ -159,6 +160,9 @@ int main(int argc, char *argv[]) {
 
   // 4. Run some checks
   validateContext();
+  if (setupOutputVariables(ctx.outvars)) {
+    exit(EXIT_CODE_BAD_PARAMETER_VALUE);
+  }
 
   // 5. Set calculated parameters
   strcpy(paramFile, ctx.filePrefix);

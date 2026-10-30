@@ -78,6 +78,9 @@ struct Context {
   char debugLogPrefix[CONTEXT_CHAR_MAXLEN];
 
   // Other
+  // Comma separated output variable selection for sipnet.out ("all" by default)
+  char outvars[CONTEXT_CHAR_MAXLEN];
+
   // File prefix for climate and param files
   char filePrefix[CONTEXT_CHAR_MAXLEN];
 

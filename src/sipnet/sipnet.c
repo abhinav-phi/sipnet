@@ -26,6 +26,7 @@
 #include "limitations.h"
 #include "nitrogen.h"
 #include "outputItems.h"
+#include "outputVariables.h"
 #include "restart.h"
 #include "runmean.h"
 #include "state.h"
@@ -434,6 +435,12 @@ void readParamData(ModelParams **modelParamsPtr, const char *paramFile) {
  * @param out File pointer for output
  */
 void outputHeader(FILE *out) {
+  if (!outputVariablesAreAll()) {
+    fprintf(out, "year day  time");
+    writeOutputVariableHeader(out);
+    fprintf(out, "\n");
+    return;
+  }
   fprintf(out, "year day  time plantWoodC plantLeafC woodCreation     ");
   fprintf(out, "soil coarseRootC fineRootC   ");
   fprintf(out, "litter  soilWater soilWetnessFrac     snow      ");
@@ -453,6 +460,12 @@ void outputHeader(FILE *out) {
  * @param time
  */
 void outputState(FILE *out, int year, int day, double time) {
+  if (!outputVariablesAreAll()) {
+    fprintf(out, "%4d %3d %5.2f", year, day, time);
+    writeOutputVariableValues(out);
+    fprintf(out, "\n");
+    return;
+  }
 
   fprintf(out, "%4d %3d %5.2f %10.2f %10.2f %12.2f ", year, day, time,
           getTotalWoodC(), envi.plantLeafC, trackers.woodCreation);
